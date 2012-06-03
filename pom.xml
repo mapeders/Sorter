@@ -23,6 +23,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+			<version>1.46b</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -41,4 +46,17 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>imagej</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://dev.imagejdev.org:8081/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 </project>
