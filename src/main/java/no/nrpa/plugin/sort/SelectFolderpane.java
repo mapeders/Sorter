@@ -21,6 +21,7 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 	private String rootDirectory;
 	JLabel targetDirLabel;
 	JLabel rootDirLabel;
+	private Checkbox acquistitionTime;
 	private Checkbox anodeTargetMaterial;
 	private Checkbox filterMaterial;
 	private Checkbox kVp;
@@ -33,6 +34,7 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 		this.rootDirectory = null;
 		this.targetDirLabel = new JLabel("Select target folder");
 		this.rootDirLabel = new JLabel("Select source folder");
+		this.acquistitionTime = null;
 		this.anodeTargetMaterial = null;
 		this.filterMaterial = null;
 		this.kVp = null;
@@ -54,6 +56,7 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 		north.add(selectRootFolderButton);
 		JPanel center = new JPanel();
 		center.setLayout(new GridLayout(12, 2));
+		this.acquistitionTime = new Checkbox ("Acquistition time", true);
 		this.anodeTargetMaterial = new Checkbox("Anode Target Material", true);
 		this.filterMaterial = new Checkbox("Filter Material", true);
 		this.kVp = new Checkbox("kVp", true);
@@ -62,28 +65,42 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 		this.compressionForce = new Checkbox("Compression force", true);
 		center.add(new JLabel(""));
 		center.add(new JLabel(""));
+		
 		center.add(new JLabel(""));
 		center.add(new JLabel(""));
+		
+		center.add(new JLabel(""));
+		center.add(this.acquistitionTime);
+		
 		center.add(new JLabel(""));
 		center.add(this.anodeTargetMaterial);
+		
 		center.add(new JLabel(""));
 		center.add(this.filterMaterial);
+		
 		center.add(new JLabel(""));
 		center.add(this.kVp);
+		
 		center.add(new JLabel(""));
 		center.add(this.exposureInUAS);
+		
 		center.add(new JLabel(""));
 		center.add(this.bodyPartThickness);
+		
 		center.add(new JLabel(""));
 		center.add(this.compressionForce);
+		
 		center.add(new JLabel(""));
 		center.add(new JLabel(""));
+		
 		center.add(new JLabel(""));
 		center.add(new JLabel(""));
+		
 		center.add(new JLabel(""));
 		center.add(new JLabel(""));
-		center.add(new JLabel(""));
-		center.add(new JLabel(""));
+		
+		/*center.add(new JLabel(""));
+		center.add(new JLabel(""));*/
 		JPanel south = new JPanel();
 		JButton execute = new JButton("Execute");
 		execute.addActionListener(act);
@@ -98,6 +115,8 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 
 	public List getMetatags() {
 		LinkedList list = new LinkedList();
+		if (getAcquistitionTimeState())
+			list.add("0008,0032");
 		if (getAnodeTargetMaterialState())
 			list.add("0018,1191");
 		if (getFilterMaterialState())
@@ -180,5 +199,9 @@ public class SelectFolderpane extends JPanel implements ActionListener {
 
 	public boolean getCompressionForceState() {
 		return this.compressionForce.getState();
+	}
+
+	public boolean getAcquistitionTimeState() {
+		return acquistitionTime.getState();
 	}
 }

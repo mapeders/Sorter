@@ -92,26 +92,34 @@ public class Sorter extends Observable {
 			if ((node != null) && (node.getValue() != null)) {
 				logger.debug("header code : " + code);
 				if (prefix.length() == 0)
-					prefix.append(node.getValue());
+					prefix.append(getTrimmedNodeValue(node));
 				else {
-					prefix.append("_" + node.getValue());
+					prefix.append("_" + getTrimmedNodeValue(node));
 				}
 			}
 		}
-		HeaderLine aquisitionDate = (HeaderLine) metaData.get("0008,0032");
-		String t = aquisitionDate.getValue();
-		int i = t.indexOf(".");
-		if (i == -1)
-			prefix.append("_" + t);
-		else {
-			prefix.append("_" + t.substring(0, i));
-		}
+		//add acquisition time at the end of the file
+//		HeaderLine aquisitionDate = (HeaderLine) metaData.get("0008,0032");
 
 		HeaderLine proc = (HeaderLine) metaData.get("0008,0068");
 		prefix.append("_" + proc.getValue());
 		return prefix.toString();
 	}
 
+	private String getTrimmedNodeValue(HeaderLine node){
+		if(node.getKey().contains("0008,0032")){
+			String t = node.getValue();
+			int i = t.indexOf(".");
+			if (i == -1)
+				return t;
+			else {
+				return t.substring(0, i);
+			}
+			
+		}
+		return node.getValue();
+	}
+	
 	public int getCurrent() {
 		return this.current;
 	}
