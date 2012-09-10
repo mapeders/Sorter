@@ -10,8 +10,11 @@
 	<packaging>jar</packaging>
 	<name>Sorter</name>
 	<description>Sorter plugin for ImageJ</description>
-
 	<inceptionYear>2007</inceptionYear>
+
+    <!--
+    External dependencies.
+    -->
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
